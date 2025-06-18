@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online tool to compress and optimize your images. Reduce file size while maintaining quality for faster websites and smaller storage.">
+    <title>Image Compression Tool - Optimize Your Images Online</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID" crossorigin="anonymous"></script>
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #4cc9f0;
+            --border-radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        main {
+            padding: 40px 0;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            color: var(--dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 32px;
+            margin-bottom: 32px;
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 48px 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 32px;
+            background-color: rgba(233, 236, 239, 0.3);
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        .upload-area.active {
+            border-color: var(--success);
+            background-color: rgba(76, 201, 240, 0.05);
+        }
+        
+        .upload-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        .upload-text h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .upload-text p {
+            color: var(--gray);
+            margin-bottom: 16px;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .control-group {
+            margin-bottom: 8px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--light-gray);
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 6px rgba(67, 97, 238, 0.3);
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+        
+        .slider-value {
+            min-width: 50px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            background-color: white;
+            transition: var(--transition);
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+        }
+        
+        select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--light-gray);
+            color: var(--dark);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--light);
+            border-color: var(--gray);
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-icon {
+            font-size: 1.2rem;
+        }
+        
+        .results {
+            display: none;
+            margin-top: 32px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .image-box {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+        }
+        
+        .image-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .image-box:hover img {
+            transform: scale(1.02);
+        }
+        
+        .image-label {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .image-info {
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .info-item {
+            background-color: var(--light);
+            padding: 12px;
+            border-radius: var(--border-radius);
+        }
+        
+        .info-item h4 {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        
+        .info-item p {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card h3 {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .stat-card p {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .savings {
+            color: var(--success) !important;
+        }
+        
+        .ad-container {
+            margin: 32px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 48px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 16px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            grid-column: 1 / -1;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 48px;
+            color: var(--gray);
+            grid-column: 1 / -1;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 32px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: inline-flex;
+            width: 70px;
+            height: 70px;
+            background-color: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 16px;
+            color: var(--dark);
+            font-size: 1.25rem;
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 24px;
+            position: relative;
+            padding-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 4px;
+        }
+        
+        .footer-about p {
+            color: #adb5bd;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 50px;
+            height: 50px;
+            margin: 40px auto;
+            border: 4px solid rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            nav ul {
+                margin-top: 16px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .card {
+                padding: 24px;
+            }
+            
+            .upload-area {
+                padding: 32px 20px;
+            }
+            
+            .controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <span class="logo-icon">📷</span>
+                <span>ImageCompress</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Top Ad -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                     data-ad-slot="YOUR_AD_UNIT_ID"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+        
+        <section class="hero">
+            <h1>Optimize Your Images in Seconds</h1>
+            <p>Reduce image file size without losing quality. Perfect for websites, social media, and storage optimization. Fast, secure, and completely free!</p>
+        </section>
+        
+        <section class="card">
+            <h2 class="card-title">Compress Your Image</h2>
+            
+            <div id="uploadArea" class="upload-area">
+                <div class="upload-icon">📤</div>
+                <div class="upload-text">
+                    <h3>Drag & Drop Your Image Here</h3>
+                    <p>or click to browse files (JPEG, PNG, WEBP supported)</p>
+                </div>
+                <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+            </div>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <label for="qualitySlider">Compression Level</label>
+                    <div class="slider-container">
+                        <input type="range" id="qualitySlider" class="slider" min="0" max="100" value="80">
+                        <span id="qualityValue" class="slider-value">80%</span>
+                    </div>
+                    <small>Higher values = better quality but larger files</small>
+                </div>
+                
+                <div class="control-group">
+                    <label for="formatSelect">Output Format</label>
+                    <select id="formatSelect" class="format-select">
+                        <option value="original">Keep original format</option>
+             
